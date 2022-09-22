@@ -3,6 +3,7 @@ import users from '../data/users'
 
 const store = createStore({
   state: {
+    users,
     usersData: users,
     currentSort: 'email',
     reverseSort: 1
@@ -11,7 +12,7 @@ const store = createStore({
   mutations: {
     // Поиск пользователей по email, first_name, last_name и username
     SEARCH_USERS (state, param) {
-      state.usersData = users.filter(
+      state.usersData = state.users.filter(
         el =>
           el.email.toUpperCase().includes(param.toUpperCase()) ||
           el.first_name.toUpperCase().includes(param.toUpperCase()) ||
@@ -31,6 +32,12 @@ const store = createStore({
         if (a[param] > b[param]) return 1 * state.reverseSort
         return 0
       })
+    },
+
+    // Добавление нового пользователя
+    ADD_USER (state, param) {
+      param.id = new Date()
+      state.users.push({ ...param })
     }
   }
 })

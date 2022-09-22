@@ -1,11 +1,13 @@
 <script setup>
 const props = defineProps({
   user: Object,
+  i: Number,
 });
 </script>
 
 <template>
   <tr>
+    <td>{{ i + 1 }}</td>
     <td>{{ user.email }}</td>
     <td>{{ user.first_name }}</td>
     <td>{{ user.pay_status }}</td>

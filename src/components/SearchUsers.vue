@@ -8,7 +8,6 @@ const { commit } = useStore();
     <input
       class="input-search"
       @input="commit('SEARCH_USERS', $event.target.value)"
-      :value="modelValue"
       placeholder="Поиск валюты"
       type="text"
     />

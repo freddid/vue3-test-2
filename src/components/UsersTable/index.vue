@@ -1,10 +1,12 @@
 <script setup>
 import { useStore } from "vuex";
 import UserInfo from "./UserInfo.vue";
+import FormAddUser from "./FormAddUser.vue";
 const { state, commit } = useStore();
 
 // заголовки столбцов
 const headerTable = [
+  ["№", "№"],
   ["Эл. почта", "email"],
   ["Имя", "first_name"],
   ["Статус оплаты", "pay_status"],
@@ -27,7 +29,13 @@ const headerTable = [
           {{ el[0] }} <span>⇕</span>
         </th>
       </tr>
-      <UserInfo :user="user" v-for="user in state.usersData" :key="user.id" />
+      <UserInfo
+        :i="i"
+        :user="user"
+        v-for="(user, i) in state.usersData"
+        :key="user.id"
+      />
+      <FormAddUser />
     </tbody>
   </table>
 </template>
@@ -35,7 +43,7 @@ const headerTable = [
 <style>
 table td,
 table th {
-  @apply border-b border-slate-400/40 py-12px px-8px font-medium text-left text-14px;
+  @apply border-b border-slate-400/40 py-12px px-8px font-medium text-left text-14px max-w-200px break-words;
 }
 
 table tr:hover {
