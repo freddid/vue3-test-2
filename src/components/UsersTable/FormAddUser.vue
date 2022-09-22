@@ -14,7 +14,7 @@ const newUserObj = ref({
 
 // Влалидация и добавление нового пользователя
 const submit = () => {
-  if (newUserObj.value.email == "" && newUserObj.value.username == "")
+  if (newUserObj.value.email == "" || newUserObj.value.username == "")
     return alert("Пожалуйста ввдетие эл. почта и ник");
 
   commit("ADD_USER", newUserObj.value);

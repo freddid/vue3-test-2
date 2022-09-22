@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import users from '../data/users'
+import mutations from './mutations'
 
 const store = createStore({
   state: {
@@ -9,37 +10,7 @@ const store = createStore({
     reverseSort: 1
   },
 
-  mutations: {
-    // Поиск пользователей по email, first_name, last_name и username
-    SEARCH_USERS (state, param) {
-      state.usersData = state.users.filter(
-        el =>
-          el.email.toUpperCase().includes(param.toUpperCase()) ||
-          el.first_name.toUpperCase().includes(param.toUpperCase()) ||
-          el.last_name.toUpperCase().includes(param.toUpperCase()) ||
-          el.username.toUpperCase().includes(param.toUpperCase())
-      )
-    },
-
-    // Сортировка таблицы по алфавиту
-    SORT_USERS (state, param) {
-      state.currentSort == param
-        ? (state.reverseSort *= -1)
-        : (state.currentSort = param)
-
-      state.usersData = state.usersData.sort((a, b) => {
-        if (a[param] < b[param]) return -1 * state.reverseSort
-        if (a[param] > b[param]) return 1 * state.reverseSort
-        return 0
-      })
-    },
-
-    // Добавление нового пользователя
-    ADD_USER (state, param) {
-      param.id = new Date()
-      state.users.push({ ...param })
-    }
-  }
+  mutations
 })
 
 export default store
